@@ -19,7 +19,7 @@ describe("cli", () => {
     assert.equal(
       result.stdout,
       [
-        "Total spent $371.40",
+        "3 expenses, total spent $371.40",
         "",
         "Balances",
         "  Ava is owed $108.70",
