@@ -1,0 +1,19 @@
+{
+  "name": "my-first-ci",
+  "version": "1.0.0",
+  "description": "Trip expense splitter used to demonstrate a Node.js CI pipeline.",
+  "bin": {
+    "settle": "src/cli.js"
+  },
+  "scripts": {
+    "start": "node src/cli.js",
+    "lint": "eslint .",
+    "test": "node --test --test-reporter=spec --test-reporter=junit --test-reporter-destination=stdout --test-reporter-destination=junit.xml"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "eslint": "^9.15.0"
+  }
+}

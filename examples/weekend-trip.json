@@ -1,0 +1,22 @@
+{
+  "expenses": [
+    {
+      "description": "Cabin",
+      "payer": "Ava",
+      "amount": 240,
+      "participants": ["Ava", "Ben", "Cho"]
+    },
+    {
+      "description": "Groceries",
+      "payer": "Ben",
+      "amount": 86.4,
+      "participants": ["Ava", "Ben", "Cho"]
+    },
+    {
+      "description": "Gas",
+      "payer": "Cho",
+      "amount": 45,
+      "participants": ["Ava", "Ben"]
+    }
+  ]
+}
