@@ -46,6 +46,15 @@ describe("settle", () => {
     ]);
   });
 
+  it("needs no transfer when someone pays only their own share", () => {
+    const result = settle([
+      { payer: "Ava", amount: 15, participants: ["Ava"] },
+    ]);
+
+    assert.deepEqual(result.balances, { Ava: 0 });
+    assert.deepEqual(result.transfers, []);
+  });
+
   it("reports an already even group as settled", () => {
     const result = settle([
       { payer: "Ava", amount: 10, participants: ["Ben"] },
