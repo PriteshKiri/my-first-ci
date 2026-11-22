@@ -1,6 +1,8 @@
 "use strict";
 
 const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const path = require("node:path");
 const { describe, it } = require("node:test");
 const { settle } = require("../src/ledger");
 
@@ -44,6 +46,15 @@ describe("settle", () => {
     ]);
   });
 
+  it("needs no transfer when someone pays only their own share", () => {
+    const result = settle([
+      { payer: "Ava", amount: 15, participants: ["Ava"] },
+    ]);
+
+    assert.deepEqual(result.balances, { Ava: 0 });
+    assert.deepEqual(result.transfers, []);
+  });
+
   it("reports an already even group as settled", () => {
     const result = settle([
       { payer: "Ava", amount: 10, participants: ["Ben"] },
@@ -52,6 +63,15 @@ describe("settle", () => {
 
     assert.deepEqual(result.balances, { Ava: 0, Ben: 0 });
     assert.deepEqual(result.transfers, []);
+  });
+
+  it("settles the weekend trip example file", () => {
+    const examplePath = path.join(__dirname, "..", "examples", "weekend-trip.json");
+    const example = JSON.parse(fs.readFileSync(examplePath, "utf8"));
+    const result = settle(example.expenses);
+
+    assert.deepEqual(result.balances, { Ava: 10870, Ben: -4490, Cho: -6380 });
+    assert.equal(sum(result.balances), 0);
   });
 
   it("rejects duplicate participants and bad input", () => {
