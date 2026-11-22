@@ -31,7 +31,12 @@ function splitEvenly(totalCents, count) {
   }
 
   const base = Math.floor(totalCents / count);
-  return Array.from({ length: count }, () => base);
+  const extra = totalCents % count;
+  const shares = [];
+  for (let index = 0; index < count; index += 1) {
+    shares.push(base + (index < extra ? 1 : 0));
+  }
+  return shares;
 }
 
 module.exports = { toCents, formatCents, splitEvenly };
