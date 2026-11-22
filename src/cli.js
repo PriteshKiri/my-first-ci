@@ -14,7 +14,10 @@ function readExpenses(filePath) {
 }
 
 function render(result) {
-  const lines = ["Balances"];
+  const totalCents = result.expenses.reduce((sum, expense) => sum + expense.totalCents, 0);
+  const count = result.expenses.length;
+  const expenseLabel = count === 1 ? "expense" : "expenses";
+  const lines = [`${count} ${expenseLabel}, total spent ${formatCents(totalCents)}`, "", "Balances"];
   const names = Object.keys(result.balances).sort();
 
   if (names.length === 0) {
